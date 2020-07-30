@@ -1,0 +1,53 @@
+<div class="admin-container">
+    <button mat-raised-button (click)="openDialog('AddProduct', {added_by: 'admin'})">Add Product</button>
+    <div class="tablearea">
+        <div class="mat-headline">Added Products List</div>
+        <div class="example-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th class="tableheader" mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element?.id}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th class="tableheader" mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element?.product_name}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="amount">
+              <th class="tableheader" mat-header-cell *matHeaderCellDef> Amount </th>
+              <td mat-cell *matCellDef="let element"> {{element?.product_amount}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="description">
+              <th class="tableheader" mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element?.product_description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="added_by">
+                <th class="tableheader" mat-header-cell *matHeaderCellDef> Added By </th>
+                <td mat-cell *matCellDef="let element"> {{element?.added_by}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th class="tableheader" mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)="openDialog('UpdateProduct',element)">Edit</a> |
+                    <a (click)="openDialog('DeleteProduct',element)">Delete</a>
+                </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+    </div>
+</div>

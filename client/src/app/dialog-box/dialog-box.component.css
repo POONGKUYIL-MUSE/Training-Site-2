@@ -1,0 +1,30 @@
+.forminput input[type=number] {
+    width: 20px;
+}
+.tablearea{
+    text-align: center;
+}
+.tableheader {
+    text-align: center;
+}
+table {
+    width: 80%;
+    margin: 0px auto;
+}
+/*.tablearea {
+    text-align: center;
+}
+
+.tableheader {
+    text-align: center;
+}
+
+table {
+    width: 80%;
+    margin: 0px auto;
+}
+
+.example-container {
+    height: 500px;
+    text-align: center;
+}*/

@@ -1,0 +1,38 @@
+<div>
+    <hr>
+        <p>{{ registrationForm.value | json }}</p>
+    <hr>
+    <div class="register-container">
+        <div class="mat-headline">Signup Form</div>
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Enter Name</mat-label>
+          <input formControlName="name" type="text" matInput required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Email</mat-label>
+            <input formControlName="email" type="email" matInput required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Mobile</mat-label>
+            <input formControlName="mobile" type="text" matInput required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Password</mat-label>
+            <input formControlName="password" type="password" matInput required>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="outline">
+            <mat-label>Enter Confirm Password</mat-label>
+            <input formControlName="cfpassword" type="password" matInput required>
+        </mat-form-field>
+        <br>
+        <span class="error">{{error}}</span>
+        <br>
+        <button type="submit" mat-raised-button color="primary">Register</button>
+    </form>
+    </div>
+</div>

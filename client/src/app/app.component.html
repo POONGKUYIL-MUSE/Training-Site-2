@@ -1,0 +1,34 @@
+<!--mat-toolbar color="primary" class="navbar">
+    <div>Training Site</div>
+    <div>
+        <span><a *ngIf="!authService.loggedIn()" routerLink="/" routerLinkActive="active"><button mat-raised-button>Login</button></a></span>
+        <span><a *ngIf="!authService.loggedIn()" routerLink="/register" routerLinkActive="active"><button mat-raised-button>Register</button></a></span>
+        <span><a *ngIf="authService.superadmin || authService.admin || authService.customer"><button mat-raised-button>Home</button></a></span>
+        <span><a *ngIf="authService.superadmin" routerLink="/admins" routerLinkActive="active"><button mat-raised-button>Admins</button></a></span>
+        <span><a *ngIf="authService.superadmin || authService.admin" routerLink="/customers"><button mat-raised-button>Customers</button></a></span>
+        <span><a *ngIf="authService.admin" routerLink="/products"><button mat-raised-button>Products</button></a></span>
+        <span><a *ngIf="authService.loggedIn()" (click)="authService.logoutUser()"><button mat-raised-button>Logout</button></a></span>
+    </div>
+</mat-toolbar-->
+
+<mat-toolbar color="primary" class="navbar">
+    <div>Training Site</div>
+    <div>
+        <!--span *ngFor="let link of links"><a [routerLink]="link.path"><button mat-raised-button>{{link.text}}</button></a></span>
+        <span *ngIf="isLoggedIn"><a routerLink="logout" (click)="logout()"><button mat-raised-button>Logout</button></a></span-->
+        <span routerLink='/login' routerLinkActive="active" *ngIf="!authService.loggedIn()">Login</span>
+        <span routerLink='/register' routerLinkActive="active" *ngIf="!authService.loggedIn()">Register</span>
+        <span routerLink='/superadmin' routerLinkActive="active" *ngIf='authService.superadminCheck() && authService.loggedIn()'>Home</span>
+        <span routerLink='/admin' routerLinkActive="active" *ngIf='authService.adminCheck() && authService.loggedIn()'>Home</span>
+        <span routerLink='/customer' routerLinkActive="active" *ngIf='authService.customerCheck() && authService.loggedIn()'>Home</span>
+        <span routerLink='/admins' routerLinkActive='active' *ngIf='authService.superadminCheck() && authService.loggedIn()'>Admin</span>
+        <span routerLink='/customers' routerLinkActive='active' *ngIf='(authService.superadminCheck() || authService.adminCheck()) && authService.loggedIn()'>Customer</span>
+        <span routerLink='/products' routerLinkActive='active' *ngIf='authService.adminCheck() && authService.loggedIn()'>Products</span>
+        <span routerLink='/carts' routerLinkActive='active' *ngIf='authService.customerCheck() && authService.loggedIn()'>Carts</span>
+        <span routerLink='/myorders' routerLinkActive='active' *ngIf='authService.customerCheck() && authService.loggedIn()'>My Orders</span>
+        <span *ngIf="authService.loggedIn()" (click)="authService.logoutUser()">Logout</span>
+
+    </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

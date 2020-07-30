@@ -1,0 +1,22 @@
+
+<div>
+  <hr>
+    <p>{{ loginForm.value | json }}</p>
+  <hr>
+<div class="login-container">
+    <div class="mat-headline">Login Form</div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Enter Email</mat-label>
+      <input formControlName="email" type="email" matInput required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Enter Password</mat-label>
+        <input formControlName="password" type="password" matInput required>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary">Login</button>
+</form>
+</div>
+</div>

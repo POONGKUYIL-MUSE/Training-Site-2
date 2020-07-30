@@ -1,0 +1,137 @@
+
+<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<div mat-dialog-content>
+    <form [formGroup]="editUserData" *ngIf="action=='Update'">
+        <mat-form-field floatLabel="auto" appearance="fill"> 
+            <input placeholder="{{action}} Name" formControlName="ename" type="text" matInput required>
+        </mat-form-field>
+        <mat-form-field floatLabel="auto" appearance="fill"> 
+            <input placeholder="{{action}} Email" formControlName="eemail" type="email" matInput required>
+        </mat-form-field>
+        <mat-form-field floatLabel="auto" appearance="fill"> 
+            <input placeholder="{{action}} Mobile" formControlName="emobile" type="text" matInput required>
+        </mat-form-field>
+        <br>
+    </form>
+
+    <form [formGroup]="addUserData" *ngIf="action=='Add'">
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Name" formControlName="name" type="text" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Email" formControlName="email" type="email" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Mobile" formControlName="mobile" type="text" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+        <input placeholder="{{action}} Password" formControlName="password" type="password" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+        <input placeholder="{{action}} Confirm Password" formControlName="cfpassword" type="password" matInput required>
+      </mat-form-field>
+      <br>
+    </form>
+
+    <form [formGroup]="addProductData" *ngIf="action=='AddProduct'">
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Name" formControlName="product_name" type="text" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Amount" formControlName="product_amount" type="number" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Desctiption" formControlName="product_description" type="text" matInput required>
+      </mat-form-field>
+      <br>
+    </form>
+
+    <form [formGroup]="editProductData" *ngIf="action=='UpdateProduct'">
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Name" formControlName="ename" type="text" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Amount" formControlName="eamount" type="number" matInput required>
+      </mat-form-field>
+      <mat-form-field floatLabel="auto" appearance="fill"> 
+          <input placeholder="{{action}} Description" formControlName="edescription" type="text" matInput required>
+      </mat-form-field>
+      <br>
+  </form>
+
+  <form *ngIf="action=='PlaceOrder'">
+    <div class="example-container">
+    <table [dataSource]="dataSource" mat-table class="tablearea">
+      <ng-container matColumnDef="id">
+        <th class="tableheader" mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th class="tableheader" mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{element.product_name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <th class="tableheader" mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let element">{{element.product_amount}}</td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th class="tableheader" mat-header-cell *matHeaderCellDef>Quantity</th>
+        <td mat-cell *matCellDef="let element; let i = index"><input matInput value="{{element.product_quantity}}" (change)="addTotal($event, i)" type="number" name="quantity" class="forminput"></td>
+      </ng-container>
+      <ng-container matColumnDef="total_cost">
+        <th class="tableheader" mat-header-cell *matHeaderCellDef>Total Cost</th>
+        <td mat-cell *matCellDef="let element"><input matInput value="{{element.product_totalamount}}" type="number" name="cost" class="forminput" readonly></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <div>
+      Total Order Cost : 
+      <input input="number" [value]="billamount"  readonly>
+    </div>
+    <!--table class="tablearea">
+      <tr class="tableheader">
+        <th >Id</th>
+        <th >Name</th>
+        <th >Amount</th>
+        <th >Quantity</th>
+        <th >Total Amount</th>
+      </tr>
+      <tr *ngFor="let m of dataSource">
+        <td><input formControlName="id" type="number" value="{{m.id}}" readonly></td>
+        <td width="20%"><input formControlName="product_name" type="text" value="{{m.product_name}}" readonly></td>
+        <td width="20%"><input formControlName="product_amount" type="text" value="{{m.product_amount}}" readonly></td>
+        <td width="20%"><input formControlName="product_quantity" type="number" value=""></td>
+        <td width="20%"><input formControlName="product_total_cost" type="number" value="" readonly></td>
+      </tr>
+      <!tr>
+        <th colspan="5"> Total Amount for the Order
+        <input type="number" [value]="billamount" readonly>
+        </th>
+      </tr->
+    </table-->
+    </div>
+  </form>
+
+  <!--mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
+    <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
+  </mat-form-field-->
+  <!--ng-template *ngIf="action=='Delete'" [formGroup]="editUserData">
+    Sure to delete <b>{{editUserData.value.ename}} </b>?
+  </ng-template-->
+
+  <div *ngIf="action=='Delete'" [formGroup]='editUserData'>
+    Sure to delete <b> {{ editUserData.value.ename }} </b>?
+  </div>
+
+  <div *ngIf="action=='DeleteProduct'" [formGroup]='editProductData'>
+    Sure to delete <b> {{ editProductData.value.ename }} </b>?
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="doAction()">{{action}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+</div>
